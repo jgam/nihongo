@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import styled from 'styled-components/native';
+import {ThemeProvider} from 'styled-components';
+import Theme from './Theme';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -9,15 +11,16 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
+
 interface IContainerProps {
-  background: string;
+  theme?:ITheme;
 }
 
 const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${(props:IContainerProps) => props.background ? props.background : 'white'};
+  background-color: ${(props:IContainerProps) => props.theme && props.theme.color.black};
 `;
 const MainText = styled.Text`
   font-size: 20;
@@ -32,9 +35,11 @@ interface State {};
 export default class App extends React.Component<Props, State> {
   render() {
     return (
-      <Container background="red">
+      <ThemeProvider theme={Theme}>
+      <Container>
         <MainText>Hello world!</MainText>
       </Container>
+      </ThemeProvider>
     );
   }
 }
