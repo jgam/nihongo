@@ -1,13 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
-import React, {Component} from 'react';
+import * as React from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+import styled from 'styled-components/native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -16,15 +9,32 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-type Props = {};
-export default class App extends Component<Props> {
+interface IContainerProps {
+  background: string;
+}
+
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props:IContainerProps) => props.background ? props.background : 'white'};
+`;
+const MainText = styled.Text`
+  font-size: 20;
+  text-align: center;
+  margin: 10px;
+  color: red;
+`;
+
+interface Props {};
+interface State {};
+
+export default class App extends React.Component<Props, State> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
+      <Container background="red">
+        <MainText>Hello world!</MainText>
+      </Container>
     );
   }
 }
